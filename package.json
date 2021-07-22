@@ -1,0 +1,14 @@
+{
+  "name": "first-selenium-app",
+  "version": "1.0.0",
+  "description": "Selenium app for exploring features for future, more dedicated uses.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Raaid",
+  "license": "ISC",
+  "dependencies": {
+    "selenium-webdriver": "*"
+  }
+}

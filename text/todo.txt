@@ -1,0 +1,4 @@
+-Request user input from the console to perform automation tasks
+-Separate functionality for different websites into different modules
+-Implement run method for each module that runs a series of methods
+-Create executable for app

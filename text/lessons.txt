@@ -1,0 +1,6 @@
+NOTE: If these recommendations sound infuriatingly bizarre, that's because they are. The module is simply not capable of better
+
+-Elements such as search bars must be clicked before typed into sometimes
+-When clicking an element, click it at least 5 times in a row, otherwise the click is prone to not actually registering
+-Wait when entering navigating to a new page with a click
+-Refresh the page after waiting for the new page to load in order for the driver to note that a new page has been accessed
