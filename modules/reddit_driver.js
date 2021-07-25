@@ -1,15 +1,7 @@
-const { By, Key, until } = require("selenium-webdriver");
+const { Key } = require("selenium-webdriver");
 const { readFile } = require("fs").promises;
-const { initDefaultDriver } = require("../utils/default_driver");
+const { initDefaultDriver, findElement, waitToFindElement } = require("../utils/default_driver");
 const { asyncDelay } = require("../utils/delay.js");
-
-//Private functions
-const findElement = async (driver, elementSelector) => {
-    return driver.findElement(By.css(elementSelector));
-};
-const waitToFindElement = async (driver, elementSelector, maxWaitTime) => {
-    return driver.wait(until.elementLocated(By.css(elementSelector)), maxWaitTime);
-};
 
 class RedditDriver {
     //Construction methods
