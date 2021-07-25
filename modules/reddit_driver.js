@@ -1,14 +1,12 @@
 const { Key } = require("selenium-webdriver");
 const { readFile } = require("fs").promises;
-const { initDefaultDriver, findElement, waitToFindElement } = require("../utils/default_driver");
+const { defaultMaxLoadTime, initDefaultDriver, findElement, waitToFindElement } = require("../utils/default_driver");
 const { asyncDelay } = require("../utils/delay.js");
 
 class RedditDriver {
     //Construction methods
     constructor() {
         this.driver = null;
-        this.defaultMaxLoadTime = 30000;
-        this.defaultMaxPageLoadTime = 3500;
         this.username = null;
         this.password = null;
         this.usernameFieldSelector = "#loginUsername";
@@ -64,13 +62,13 @@ class RedditDriver {
     }
     async clickUserDropdown() {
         //Wait to find the element to determine the correct page having been loaded
-        let userDropdown = await waitToFindElement(this.driver, this.userDropdownSelector, this.defaultMaxLoadTime);
+        let userDropdown = await waitToFindElement(this.driver, this.userDropdownSelector, defaultMaxLoadTime);
 
         //Refresh the page to properly set its connection to the driver
         await this.driver.navigate().refresh();
 
         //Find the element again and click it
-        userDropdown = await waitToFindElement(this.driver, this.userDropdownSelector, this.defaultMaxLoadTime);
+        userDropdown = await waitToFindElement(this.driver, this.userDropdownSelector, defaultMaxLoadTime);
         await userDropdown.click();
         console.log("Successfully clicked on the user dropdown");
     }
@@ -85,7 +83,7 @@ class RedditDriver {
         console.log("Successfully clicked on the chat link");
     }
     async typeIntoChat({ message="", receiver=null, send=false }) {
-        const chatTextArea = await waitToFindElement(this.driver, this.chatTextAreaSelector, this.defaultMaxLoadTime);
+        const chatTextArea = await waitToFindElement(this.driver, this.chatTextAreaSelector, defaultMaxLoadTime);
         await asyncDelay(500);
 
         if (receiver !== null) {
