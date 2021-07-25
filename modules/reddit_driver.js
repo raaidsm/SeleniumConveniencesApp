@@ -1,7 +1,6 @@
-const { Builder, By, Key, until } = require("selenium-webdriver");
-const Firefox = require("selenium-webdriver/firefox");
-const options = new Firefox.Options();
+const { By, Key, until } = require("selenium-webdriver");
 const { readFile } = require("fs").promises;
+const { initDefaultDriver } = require("../utils/default_driver");
 const { asyncDelay } = require("../utils/delay.js");
 
 //Private functions
@@ -28,11 +27,10 @@ class RedditDriver {
         this.chatTextAreaSelector = "form#MessageInputTooltip--Container > div > div > textarea";
     }
     async initDriver() {
-        //Firefox driver with options
-        options.setPreference("dom.webnotifications.enabled", false);
-        this.driver = await new Builder().forBrowser("firefox").setFirefoxOptions(options).build();
+        //Initialize Firefox driver
+        this.driver = await initDefaultDriver();
 
-        //Username and password
+        //Initialize username and password
         const info = JSON.parse(await readFile("./text/info.json", "utf8"));
         this.username = info.reddit_username;
         this.password = info.reddit_password;
