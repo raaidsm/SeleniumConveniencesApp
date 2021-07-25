@@ -36,9 +36,31 @@ class RedditDriver {
         const info = JSON.parse(await readFile("./text/info.json", "utf8"));
         this.username = info.reddit_username;
         this.password = info.reddit_password;
+
+        return this;
     }
 
     //Public methods
+    async run(typingIntoChatParameters) {
+        //Go to site
+        await this.get("https://www.reddit.com/login/?dest=https%3A%2F%2Fwww.reddit.com%2F");
+
+        //Enter username and password
+        await this.enterUsernameAndPassword();
+
+        //Click on the user dropdown
+        await this.clickUserDropdown();
+
+        //Click on the Profile link
+        await this.clickProfileLink();
+
+        //Click on the chat link to open the chat menu
+        await this.clickChatLink();
+
+        //Click on the chat area and enter some text
+        await this.typeIntoChat(typingIntoChatParameters);
+    }
+
     async get(url) {
         await this.driver.get(url);
     }
@@ -65,7 +87,7 @@ class RedditDriver {
     async clickProfileLink() {
         const profileLink = await findElement(this.driver, this.profileLinkSelector);
         await profileLink.click();
-        console.log("Succesfully clicked on the profile link");
+        console.log("Successfully clicked on the profile link");
     }
     async clickChatLink() {
         const chatLink = await findElement(this.driver, this.chatLinkSelector);
