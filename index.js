@@ -9,7 +9,7 @@ const { RedditDriver } = require("./modules/reddit_driver.js");
 
         const message = "This message is from my browser automation tool! " +
             "It was sent programmatically without manual input from me :)";
-        await driver.run({ message: message });
+        await driver.runLoginAndSendChat({ message: message });
     } catch (error) {
         console.log("Error = " + error);
     } finally {
